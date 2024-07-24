@@ -13,7 +13,7 @@ void Connect::begin(Quaternion* orientation){
 	Serial.print("STA MAC: "); Serial.println(WiFi.macAddress());
 	// Init ESPNow with a fallback logic
 	initESPNow();
-	
+	esp_now_register_recv_cb(OnDataRecv);
 	// add a broadcast peer
 	initBroadcastSlave();
 }
@@ -26,6 +26,14 @@ void Connect::initESPNow() {
 	else {
 		Serial.println("ESPNow Init Failed");
 		ESP.restart();
+	}
+}
+
+
+void Connect::update() {
+	if (this->send_now) {
+		this->sendData();
+		this->send_now = false;
 	}
 }
 
@@ -138,3 +146,8 @@ void Connect::sendData() {
 }
 
 Connect connect;
+
+// callback when data is recv from Master
+void IRAM_ATTR OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len) {
+	connect.send_now = true;
+}

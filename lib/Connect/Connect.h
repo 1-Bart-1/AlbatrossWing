@@ -15,6 +15,8 @@ class Connect {
     public:
         Connect();
         void begin(Quaternion* orientation);
+        void update();
+        bool send_now = false;
         void sendData();
     private:
         Quaternion* orientation;
@@ -27,7 +29,7 @@ class Connect {
 
 extern Connect connect;
 
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status);
+// void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status);
 void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len);     
 
 #endif

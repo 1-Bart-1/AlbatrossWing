@@ -6,9 +6,6 @@
 #include <SparkFunMPU9250-DMP.h>
 #include <helper_3dmath.h>
 
-#define SDA_PIN 16
-#define SCL_PIN 17
-
 
 class Orient {
     public:
@@ -19,7 +16,6 @@ class Orient {
         MPU9250_DMP imu;
 
         Orient() {
-            Wire.setPins(SDA_PIN, SCL_PIN); // Set the I2C pins before begin
             Wire.begin();
         }
 

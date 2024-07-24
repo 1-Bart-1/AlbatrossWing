@@ -14,10 +14,12 @@ void setup() {
 }
 
 void loop() {
-  orient.update(&orientation);
-  connect.sendData();
-  Serial.print(orientation.w);
-  Serial.println();
-	
-  delay(10);
+  if (connect.send_now) {
+    orient.update(&orientation);
+    connect.sendData();
+    connect.send_now = false;
+  }
+  delay(1);
+  // Serial.print(orientation.w);
+  // Serial.println();
 }

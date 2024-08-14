@@ -14,10 +14,10 @@
 class Connect {
     public:
         Connect();
-        void begin(Quaternion* orientation);
+        void begin();
         void update();
         bool send_now = false;
-        void sendData();
+        void sendData(Quaternion* orientation);
     private:
         Quaternion* orientation;
         esp_now_peer_info_t slave;

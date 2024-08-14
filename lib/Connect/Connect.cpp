@@ -6,9 +6,7 @@ Connect::Connect(){
 
 }
 
-void Connect::begin(Quaternion* orientation){
-	this->orientation = orientation;
-
+void Connect::begin(){
     WiFi.mode(WIFI_STA);
 	Serial.print("STA MAC: "); Serial.println(WiFi.macAddress());
 	// Init ESPNow with a fallback logic
@@ -136,7 +134,7 @@ void Connect::initBroadcastSlave() {
 
 
 // send data
-void Connect::sendData() {
+void Connect::sendData(Quaternion* orientation) {
 	uint8_t data[sizeof(*orientation)];
 	memcpy(data, orientation, sizeof(*orientation));
 

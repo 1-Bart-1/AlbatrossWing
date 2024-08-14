@@ -10,13 +10,13 @@ uint8_t peerAddres[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 void setup() {
   Serial.begin(115200);
   orient.begin();
-  connect.begin(&orientation);
+  connect.begin();
 }
 
 void loop() {
   if (connect.send_now) {
     orient.update(&orientation);
-    connect.sendData();
+    connect.sendData(&orientation);
     connect.send_now = false;
   }
   delay(1);
